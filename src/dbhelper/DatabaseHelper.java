@@ -14,7 +14,7 @@ interface UserTableOperations {
 
     boolean createUser(UserModel user);
 
-    void updateUser();
+    boolean updateUser(UserModel user);
 
     boolean deleteUser(String regno, String password);
 
@@ -157,8 +157,19 @@ public class DatabaseHelper implements UserTableOperations {
 
 
     @Override
-    public void updateUser() {
-
+    public boolean updateUser(UserModel user) {
+        tableExists();
+        try {
+            Connection conn = getConnection();
+            String updateQuery =String.format( "update student set name='%s',department=%d,dob='%s',gender='%s',email='%s',mobile='%s',password='%s' where regno='%s'",user.getName(),user.getDepartment(),user.getDob(),user.getGender(),user.getEmail(),user.getMobile(),user.getPassword(),user.getRegNo());
+            PreparedStatement stmt = conn.prepareStatement(updateQuery);
+            stmt.executeUpdate();
+            conn.close();
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
     }
 
     @Override
@@ -169,9 +180,10 @@ public class DatabaseHelper implements UserTableOperations {
             String deleteQuery = String.format("delete from student where regno='%s' and password='%s'", regno, password);
             PreparedStatement stmt = conn.prepareStatement(deleteQuery);
             stmt.executeQuery();
+            conn.close();
             return true;
         } catch (Exception e) {
-            System.out.println("Exception : "+e.getMessage());
+            System.out.println("Exception : " + e.getMessage());
         }
         return false;
     }
