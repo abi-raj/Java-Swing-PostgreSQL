@@ -69,7 +69,8 @@ public class DeleteFrame extends JFrame implements ActionListener {
                 if (!dbHelper.checkUserExists(regno, password)) {
                     JOptionPane.showMessageDialog(this, "User credential doesn't exist");
                 } else {
-                        JOptionPane.showMessageDialog(this, "Deleted Successfully");
+                    dbHelper.deleteUser(regno, password);
+                    JOptionPane.showMessageDialog(this, "Deleted Successfully");
 
                 }
             }
