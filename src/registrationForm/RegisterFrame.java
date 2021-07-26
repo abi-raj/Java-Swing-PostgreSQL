@@ -1,6 +1,4 @@
 package registrationForm;
-
-
 import dbhelper.DatabaseHelper;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
@@ -8,13 +6,11 @@ import org.jdatepicker.impl.UtilDateModel;
 import usermodel.UserModel;
 import utilities.DateLabelFormatter;
 import utilities.ValidationHelper;
-
+import javax.swing.*;
 import java.awt.*;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Properties;
-import javax.swing.*;
 
 public class RegisterFrame extends JFrame implements ActionListener {
     final String[] departments = {"CSE", "IT", "EEE", "ECE", "MECH", "MCT", "CSBS"};
@@ -66,6 +62,9 @@ public class RegisterFrame extends JFrame implements ActionListener {
         container.setLayout(null);
     }
 
+    public static void main(String[] args) {
+        RegisterFrame frame = new RegisterFrame();
+    }
 
     public void addComponentsToContainer() {
         rbg.add(maleRadio);
@@ -128,7 +127,6 @@ public class RegisterFrame extends JFrame implements ActionListener {
 
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (maleRadio.isSelected()) {
@@ -144,22 +142,22 @@ public class RegisterFrame extends JFrame implements ActionListener {
             } else {
                 passwordMatcherLabel.setText("Passwords match");
                 passwordMatcherLabel.setForeground(Color.blue);
-               if(validateAll()){
-                   DatabaseHelper dbhelper = new DatabaseHelper();
-                   String reg = regNoField.getText().toString();
-                   String name = nameField.getText().toString();
-                   String dob =datePicker.getJFormattedTextField().getText();
-                   String mobile = mobileField.getText().toString();
-                   int dept = dropdown.getSelectedIndex();
-                   String email = emailField.getText().toString();
-                   String password = passwordField.getText().toString();
-                   UserModel user= new UserModel(reg,name,dept,dob,gender,email,mobile,password);
-                   if(dbhelper.createUser(user)){
-                       JOptionPane.showMessageDialog(this, "Registered successfully");
-                   }else{
-                       JOptionPane.showMessageDialog(this, "Registration Failure!");
-                   }
-               }
+                if (validateAll()) {
+                    DatabaseHelper dbhelper = new DatabaseHelper();
+                    String reg = regNoField.getText().toString();
+                    String name = nameField.getText().toString();
+                    String dob = datePicker.getJFormattedTextField().getText();
+                    String mobile = mobileField.getText().toString();
+                    int dept = dropdown.getSelectedIndex();
+                    String email = emailField.getText().toString();
+                    String password = passwordField.getText().toString();
+                    UserModel user = new UserModel(reg, name, dept, dob, gender, email, mobile, password);
+                    if (dbhelper.createUser(user)) {
+                        JOptionPane.showMessageDialog(this, "Registered successfully");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Registration Failure!");
+                    }
+                }
             }
         }
     }

@@ -26,6 +26,10 @@ public class LoginFrame extends JFrame implements ActionListener {
         addActionEvent();
     }
 
+    public static void main(String[] args) {
+        LoginFrame frame = new LoginFrame();
+    }
+
     public void setLayoutManager() {
 
         container.setLayout(null);

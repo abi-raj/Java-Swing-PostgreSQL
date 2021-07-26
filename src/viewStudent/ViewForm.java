@@ -46,6 +46,10 @@ public class ViewForm extends JFrame implements ActionListener {
         setComponentActions();
     }
 
+    public static void main(String[] args) {
+        ViewForm frame = new ViewForm();
+    }
+
     public void addComponentsToContainer() {
         container.add(regNoLabel);
         container.add(regDropdown);
@@ -99,7 +103,6 @@ public class ViewForm extends JFrame implements ActionListener {
         viewButton.addActionListener(this);
 
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {

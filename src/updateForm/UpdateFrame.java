@@ -50,6 +50,10 @@ public class UpdateFrame extends JFrame implements ActionListener {
         setComponentActions();
     }
 
+    public static void main(String[] args) {
+        UpdateFrame frame = new UpdateFrame();
+    }
+
     public void addComponentsToContainer() {
         container.add(regNoLabel);
         container.add(regDropdown);
@@ -111,7 +115,6 @@ public class UpdateFrame extends JFrame implements ActionListener {
 
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println(e.getSource());
@@ -130,16 +133,16 @@ public class UpdateFrame extends JFrame implements ActionListener {
                 if (validateAll()) {
                     //updated
                     String name = nameField.getText().toString();
-                    String dob =dobField.getText().toString();
+                    String dob = dobField.getText().toString();
                     String mobile = mobileField.getText().toString();
                     int dept = deptDropdown.getSelectedIndex();
                     String gender = genderField.getText().toString();
                     String email = emailField.getText().toString();
 
-                    UserModel user= new UserModel(regno,name,dept,dob,gender,email,mobile,pass);
-                    if(dbHelper.updateUser(user)){
+                    UserModel user = new UserModel(regno, name, dept, dob, gender, email, mobile, pass);
+                    if (dbHelper.updateUser(user)) {
                         JOptionPane.showMessageDialog(this, "Updated successfully!");
-                    }else{
+                    } else {
                         JOptionPane.showMessageDialog(this, "Updation Failure!");
                     }
 

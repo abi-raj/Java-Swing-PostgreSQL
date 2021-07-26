@@ -28,6 +28,10 @@ public class DeleteFrame extends JFrame implements ActionListener {
 
     }
 
+    public static void main(String[] args) {
+        DeleteFrame frame = new DeleteFrame();
+    }
+
     public void setLayoutManager() {
 
         container.setLayout(null);
